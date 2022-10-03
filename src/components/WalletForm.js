@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { getCurrent } from '../redux/actions';
 
 const PAGAMENTO_LIST = [
   'Dinheiro',
@@ -20,6 +21,11 @@ class WalletForm extends Component {
     description: '',
   };
 
+  componentDidMount() {
+    const { moedas } = this.props;
+    moedas();
+  }
+
   handlechanger = ({ target }) => {
     const { name, value } = target;
     this.setState({ [name]: value });
@@ -27,6 +33,7 @@ class WalletForm extends Component {
 
   render() {
     const { value, description } = this.state;
+    const { currencies } = this.props;
     return (
       <>
         <div>WalletForm</div>
@@ -53,7 +60,9 @@ class WalletForm extends Component {
               defaultOption="Selecione"
               name="currency"
             >
-              0
+              { currencies.map((e) => (
+                <option key={ e } value={ e }>{e}</option>
+              ))}
 
             </select>
           </label>
@@ -87,4 +96,12 @@ class WalletForm extends Component {
   }
 }
 
-export default connect()(WalletForm);
+const mapStateToProps = (state) => ({
+  currencies: state.wallet.currencies,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  moedas: () => dispatch(getCurrent()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);

@@ -16,4 +16,4 @@ const wallet = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default user;
+export default wallet;
