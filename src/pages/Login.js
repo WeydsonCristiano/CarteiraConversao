@@ -39,7 +39,7 @@ class Login extends React.Component {
     const { isBtnDisabled } = this.state;
     return (
       <div>
-        <h1>Tybe Wallet</h1>
+        <h1>Trybe Wallet</h1>
         <form>
           <div>
             <label htmlFor="email">
