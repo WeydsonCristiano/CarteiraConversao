@@ -1,4 +1,4 @@
-import { MOEDA_ACT } from '../actions';
+import { MOEDA_ACT, SALVA_DISPESA } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -13,6 +13,12 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       currencies: Object.keys(action.payload).filter((item) => item !== 'USDT') };
+  case SALVA_DISPESA:
+    return {
+      ...state,
+      expenses: [...state.expenses, action.payload],
+    };
+
   default:
     return state;
   }

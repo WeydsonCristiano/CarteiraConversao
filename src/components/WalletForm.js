@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getCurrent } from '../redux/actions';
+import { getCurrent, salvarDispesas } from '../redux/actions';
 
 const PAGAMENTO_LIST = [
   'Dinheiro',
@@ -16,10 +16,17 @@ const CATEGORIA_LIST = [
   'Saúde',
 ];
 
+const INITIAL_STATE = {
+  value: '',
+  description: '',
+  currency: 'USD',
+  method: 'Dinheiro',
+  tag: 'Alimentação',
+};
+
 class WalletForm extends Component {
   state = {
-    value: 0,
-    description: '',
+    ...INITIAL_STATE,
   };
 
   componentDidMount() {
@@ -32,33 +39,54 @@ class WalletForm extends Component {
     this.setState({ [name]: value });
   };
 
+  onClickButton = async (e) => {
+    e.preventDefault();
+    const { expenses, salvar } = this.props;
+    const endPont = 'https://economia.awesomeapi.com.br/json/all';
+    const data = await fetch(endPont);
+    const requisicaoMoedas = await data.json();
+    salvar({
+      ...this.state,
+      exchangeRates: requisicaoMoedas,
+      id: expenses.length });
+    this.setState({
+      ...INITIAL_STATE,
+    });
+  };
+
   render() {
-    const { value, description } = this.state;
+    const { value, description, currency, method, tag } = this.state;
     const { currencies } = this.props;
     return (
       <>
         <div>WalletForm</div>
-        <form>
+        <form
+          onSubmit={ this.onClickButton }
+        >
+          Valor:
           <input
             data-testid="value-input"
             name="value"
             value={ value }
             onChange={ this.handlechanger }
-            type="text"
+            type="number"
             required
           />
+          Descrição:
           <input
             data-testid="description-input"
             name="description"
             value={ description }
+            onChange={ this.handlechanger }
             type="text"
             required
           />
           <label htmlFor="currency">
             <select
               id="currency"
+              onChange={ this.handlechanger }
               data-testid="currency-input"
-              defaultOption="Selecione"
+              value={ currency }
               name="currency"
             >
               { currencies.map((e) => (
@@ -70,8 +98,9 @@ class WalletForm extends Component {
           <label htmlFor="method">
             <select
               id="method"
+              value={ method }
+              onChange={ this.handlechanger }
               data-testid="method-input"
-              defaultOption="Selecione"
               name="method"
             >
               {PAGAMENTO_LIST.map((e) => (
@@ -82,8 +111,9 @@ class WalletForm extends Component {
           <label htmlFor="tag">
             <select
               id="tag"
+              value={ tag }
+              onChange={ this.handlechanger }
               data-testid="tag-input"
-              defaultOption="Selecione"
               name="tag"
             >
               {CATEGORIA_LIST.map((e) => (
@@ -91,6 +121,12 @@ class WalletForm extends Component {
               ))}
             </select>
           </label>
+          <button
+            type="submit"
+          >
+            Adicionar despesas
+
+          </button>
         </form>
       </>
     );
@@ -99,10 +135,12 @@ class WalletForm extends Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
+  expenses: state.wallet.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   moedas: () => dispatch(getCurrent()),
+  salvar: (dispesa) => dispatch(salvarDispesas(dispesa)),
 });
 
 WalletForm.propTypes = {
