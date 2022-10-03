@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { getCurrent } from '../redux/actions';
 
 const PAGAMENTO_LIST = [
@@ -103,5 +104,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   moedas: () => dispatch(getCurrent()),
 });
+
+WalletForm.propTypes = {
+  currencies: PropTypes.array.strings,
+}.isRequired;
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);
