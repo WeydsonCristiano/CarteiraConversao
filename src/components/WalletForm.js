@@ -15,51 +15,72 @@ const CATEGORIA_LIST = [
 ];
 
 class WalletForm extends Component {
-  getCurrent = async () => {
-    const endPont = 'https://economia.awesomeapi.com.br/json/all';
-    const data = await fetch(endPont);
-    const current = await data.jason();
+  state = {
+    value: 0,
+    description: '',
+  };
+
+  handlechanger = ({ target }) => {
+    const { name, value } = target;
+    this.setState({ [name]: value });
   };
 
   render() {
+    const { value, description } = this.state;
     return (
       <>
         <div>WalletForm</div>
         <form>
-          <Input
+          <input
             data-testid="value-input"
-            name="valor"
+            name="value"
+            value={ value }
+            onChange={ this.handlechanger }
             type="text"
             required
           />
-          <Input
+          <input
             data-testid="description-input"
-            name="despesa"
+            name="description"
+            value={ description }
             type="text"
             required
           />
-          <Select
-            data-testid="currency-input"
-            defaultOption="Selecione"
-            label="Moeda: "
-            name="moeda"
-            options={ this.getCurrent }
-          />
-          <Select
-            data-testid="method-input"
-            defaultOption="Selecione"
-            label="Pagamento: "
-            name="pagamento"
-            options={ PAGAMENTO_LIST }
-          />
-          <Select
-            data-testid="tag-input"
-            defaultOption="Selecione"
-            label="Categoria: "
-            name="categoria"
-            options={ CATEGORIA_LIST }
-          />
+          <label htmlFor="currency">
+            <select
+              id="currency"
+              data-testid="currency-input"
+              defaultOption="Selecione"
+              name="currency"
+            >
+              0
 
+            </select>
+          </label>
+          <label htmlFor="method">
+            <select
+              id="method"
+              data-testid="method-input"
+              defaultOption="Selecione"
+              name="method"
+            >
+              {PAGAMENTO_LIST.map((e) => (
+                <option key={ e } value={ e }>{e}</option>
+              ))}
+            </select>
+          </label>
+          <label htmlFor="tag">
+            <select
+              id="tag"
+              data-testid="tag-input"
+              defaultOption="Selecione"
+              name="tag"
+            >
+              {CATEGORIA_LIST.map((e) => (
+                <option key={ e } value={ e }>{e}</option>
+              ))}
+            </select>
+          </label>
         </form>
       </>
     );
