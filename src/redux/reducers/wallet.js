@@ -10,7 +10,9 @@ const INITIAL_STATE = {
 const wallet = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case MOEDA_ACT:
-    return { ...state, currencies: Object.keys(action.payload) };
+    return {
+      ...state,
+      currencies: Object.keys(action.payload).filter((item) => item !== 'USDT') };
   default:
     return state;
   }
