@@ -125,7 +125,6 @@ class WalletForm extends Component {
             type="submit"
           >
             Adicionar despesas
-
           </button>
         </form>
       </>
