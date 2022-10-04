@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { removerItens } from '../redux/actions';
+import { removerItens, editarDispesa } from '../redux/actions';
 
 class Table extends Component {
   botaoRemover = (e) => {
@@ -9,6 +9,11 @@ class Table extends Component {
     const { dispatch } = this.props;
     const { target: { id } } = e;
     dispatch(removerItens(id));
+  };
+
+  editarBotao = (id) => {
+    const { dispatch } = this.props;
+    dispatch(editarDispesa(id));
   };
 
   render() {
@@ -62,6 +67,8 @@ class Table extends Component {
                   <button
                     data-testid="edit-btn"
                     type="button"
+                    id={ e.id }
+                    onClick={ () => this.editarBotao(e.id) }
                   >
                     Editar despesa
                   </button>

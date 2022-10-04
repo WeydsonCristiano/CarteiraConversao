@@ -26,6 +26,21 @@ export const removerItens = (payload) => ({
   payload,
 });
 //
+
+export const EDITAR_DISPESA = 'EDITAR_DISPESA';
+
+export const editarDispesa = (payload) => ({
+  type: EDITAR_DISPESA,
+  payload,
+});
+
+export const OBJETO_EDITADO = 'OBJETO_EDITADO';
+
+export const objetoEditado = (payload) => ({
+  type: OBJETO_EDITADO,
+  payload,
+});
+
 export const getCurrent = () => {
   const endPont = 'https://economia.awesomeapi.com.br/json/all';
   return async (dispatch) => {

@@ -1,4 +1,8 @@
-import { MOEDA_ACT, SALVA_DISPESA, REMOVE_ITENS } from '../actions';
+import { MOEDA_ACT,
+  SALVA_DISPESA,
+  REMOVE_ITENS,
+  EDITAR_DISPESA,
+  OBJETO_EDITADO } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -22,6 +26,18 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       expenses: state.expenses.filter((item) => +item.id !== +action.payload),
+    };
+  case EDITAR_DISPESA:
+    return {
+      ...state,
+      editor: true,
+      idToEdit: action.payload,
+    };
+  case OBJETO_EDITADO:
+    return {
+      ...state,
+      expenses: [...action.payload],
+      editor: false,
     };
 
   default:
