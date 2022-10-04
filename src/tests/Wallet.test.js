@@ -1,11 +1,14 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import App from '../App';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
+import App from '../App';
+import mockData from './helpers/mockData';
 
 describe('Testar funcionalidades no meu Wallet', () => {
   test('testar campos do walletForm', async () => {
+    jest.spyOn(global, 'fetch').mockImplementation(async () => ({ json: async () => mockData }));
+    // ajuda do sakae ^^^
     renderWithRouterAndRedux(<App />, { initialEntries: ['/carteira'] });
 
     const walletForm = screen.getByText(/walletform/i);
@@ -15,6 +18,7 @@ describe('Testar funcionalidades no meu Wallet', () => {
       name: /adicionar despesas/i,
     });
     expect(adicionarDispesa).toBeInTheDocument();
+    userEvent.click(adicionarDispesa);
 
     const descricao = screen.getByRole('columnheader', {
       name: /descrição/i,
@@ -51,7 +55,7 @@ describe('Testar funcionalidades no meu Wallet', () => {
     const btnExcluir = screen.getByRole('button', {
       name: /excluir/i,
     });
-    expect(btnExcluir).toBe();
+    expect(btnExcluir).toBeInTheDocument();
     userEvent.click(btnExcluir);
   });
 });
