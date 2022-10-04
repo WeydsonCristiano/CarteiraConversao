@@ -8,12 +8,12 @@ class Header extends Component {
     return expenses.reduce((acum, dispesa) => {
       const { ask } = dispesa.exchangeRates[dispesa.currency];
       const valorTotal = acum + (dispesa.value * ask);
-      return Number(valorTotal.toFixed(2));
-    }, 0);
+      return Number(valorTotal);
+    }, 0).toFixed(2);
   };
 
   render() {
-    const { email } = this.props;
+    const { email, expenses } = this.props;
     return (
       <>
         <div>Header</div>
@@ -25,7 +25,7 @@ class Header extends Component {
         <h3
           data-testid="total-field"
         >
-          {this.somaCompras()}
+          { expenses === undefined ? 0 : this.somaCompras()}
         </h3>
         <h3
           data-testid="header-currency-field"

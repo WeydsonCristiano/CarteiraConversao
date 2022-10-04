@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { removerItens } from '../redux/actions';
 
 class Table extends Component {
-  // botãoRemover = (index) => {
-  //   const itensRemover = this.states.itens.slice();
-  //   itensRemover.splice(index, 1);
-  //   this.setState({ itens: itensRemover });
-  // };
+  botaoRemover = (e) => {
+    e.preventDefault();
+    const { dispatch } = this.props;
+    const { target: { id } } = e;
+    dispatch(removerItens(id));
+  };
 
   render() {
     const { expenses } = this.props;
@@ -56,21 +58,22 @@ class Table extends Component {
                 <td>{Number(e.exchangeRates[e.currency].ask).toFixed(2)}</td>
                 <td>{Number(e.value * e.exchangeRates[e.currency].ask).toFixed(2)}</td>
                 <td>Real</td>
-                <button
-                  data-testid="edit-btn"
-                  type="button"
-                >
-                  Editar
-
-                </button>
-                <button
-                  data-testid="delete-btn"
-                  type="button"
-                // botãoRemover={ this.botãoRemover }
-                >
-                  Excluir
-
-                </button>
+                <td>
+                  <button
+                    data-testid="edit-btn"
+                    type="button"
+                  >
+                    Editar
+                  </button>
+                  <button
+                    data-testid="delete-btn"
+                    id={ e.id }
+                    type="button"
+                    onClick={ this.botaoRemover }
+                  >
+                    Excluir
+                  </button>
+                </td>
               </tr>
             ))
           }
@@ -86,6 +89,7 @@ const mapStateToProps = (state) => ({
 
 Table.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  dispatch: PropTypes.shape().isRequired,
 };
 
 export default connect(mapStateToProps)(Table);

@@ -4,21 +4,28 @@ export const userForm = (payload) => ({
   type: USER_FORM,
   payload,
 });
-
+//
 export const MOEDA_ACT = 'MOEDA_ACT';
 
 export const moedas = (payload) => ({
   type: MOEDA_ACT,
   payload,
 });
-
+//
 export const SALVA_DISPESA = 'SALVA_DISPESA';
 
 export const salvarDispesas = (payload) => ({
   type: SALVA_DISPESA,
   payload,
 });
+//
+export const REMOVE_ITENS = 'REMOVE_ITENS';
 
+export const removerItens = (payload) => ({
+  type: REMOVE_ITENS,
+  payload,
+});
+//
 export const getCurrent = () => {
   const endPont = 'https://economia.awesomeapi.com.br/json/all';
   return async (dispatch) => {
