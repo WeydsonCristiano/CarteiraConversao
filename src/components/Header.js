@@ -13,7 +13,7 @@ class Header extends Component {
   };
 
   render() {
-    const { email, expenses } = this.props;
+    const { email } = this.props;
     return (
       <>
         <div>Header</div>
@@ -25,7 +25,7 @@ class Header extends Component {
         <h3
           data-testid="total-field"
         >
-          { expenses === undefined ? 0 : this.somaCompras()}
+          { this.somaCompras() }
         </h3>
         <h3
           data-testid="header-currency-field"

@@ -14,6 +14,8 @@ describe('Testar funcionalidades no meu Wallet', () => {
     const walletForm = screen.getByText(/walletform/i);
     expect(walletForm).toBeInTheDocument();
 
+    expect(screen.getByText(/0\.00/i)).toBeInTheDocument();
+
     const adicionarDispesa = screen.getByRole('button', {
       name: /adicionar despesas/i,
     });
