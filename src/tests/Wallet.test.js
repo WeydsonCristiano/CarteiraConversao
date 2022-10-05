@@ -47,32 +47,47 @@ describe('Componente Botao Adicionar Dispesas', () => {
   });
 });
 
-describe('Componente Botao editar', () => {
-  test('testar botão editar', () => {
+describe('Logica editar dispesa', () => {
+  test('logica editar', async () => {
     jest.spyOn(global, 'fetch').mockImplementation(async () => ({ json: async () => mockData }));
     renderWithRouterAndRedux(<App />, { initialEntries: ['/carteira'] });
-
+    const valueInput = screen.getByTestId('value-input');
+    const describeInput = screen.getByTestId('description-input');
+    const btnAdc = screen.getByRole('button', {
+      name: /adicionar despesas/i,
+    });
+    userEvent.click(btnAdc);
+    const buttonEdt = await screen.findByTestId('edit-btn');
+    userEvent.type(describeInput, 'leite');
+    userEvent.click(btnAdc);
+    await screen.findByRole('cell', {
+      name: /leite/i,
+    });
+    userEvent.click(buttonEdt);
+    userEvent.type(valueInput, '100');
+    userEvent.type(describeInput, 'arroz');
     const btnEdt = screen.getByRole('button', {
       name: /editar despesas/i,
     });
-    expect(btnEdt).toBeInTheDocument();
-
-    const buttonEdt = screen.getByTestId('edit-btn');
-    expect(buttonEdt).toBeInTheDocument();
+    userEvent.click(btnEdt);
+    await screen.findByRole('cell', {
+      name: /arroz/i,
+    });
   });
 });
 
 describe('Componente Botao Excluir', () => {
-  test('testar Botão Excluir', () => {
+  test('testar Botão Excluir', async () => {
     jest.spyOn(global, 'fetch').mockImplementation(async () => ({ json: async () => mockData }));
     renderWithRouterAndRedux(<App />, { initialEntries: ['/carteira'] });
 
-    const btnExc = screen.getByRole('button', {
-      name: /excluir/i,
+    const btnAdc = screen.getByRole('button', {
+      name: /adicionar despesas/i,
     });
+    expect(btnAdc).toBeInTheDocument();
+    userEvent.click(btnAdc);
+    const btnExc = await screen.findByTestId('delete-btn');
     expect(btnExc).toBeInTheDocument();
-    const buttonExc = screen.getByTestId('delete-btn');
-    expect(buttonExc).toBeInTheDocument();
-    userEvent.click(buttonExc);
+    userEvent.click(btnExc);
   });
 });

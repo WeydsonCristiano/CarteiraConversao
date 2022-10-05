@@ -182,8 +182,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  moedas: () => dispatch(getCurrent()),
-  salvar: (dispesa) => dispatch(salvarDispesas(dispesa)),
+  moedas: (obj) => dispatch(getCurrent(obj)),
+  salvar: (obj) => dispatch(salvarDispesas(obj)),
   editar: (obj) => dispatch(objetoEditado(obj)),
 });
 
