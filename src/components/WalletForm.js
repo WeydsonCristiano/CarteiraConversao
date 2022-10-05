@@ -39,12 +39,14 @@ class WalletForm extends Component {
     const findExpense = expenses.find((e) => e.id === id);
     const { exchangeRates } = findExpense;
     const filterExpense = expenses.filter((e) => e.id !== id);
-    const { value,
+    const {
+      value,
       description,
       currency,
       method,
       tag } = this.state;
-    const objEditado = { id,
+    const objEditado = {
+      id,
       value,
       description,
       currency,

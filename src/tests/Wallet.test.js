@@ -10,6 +10,23 @@ describe('Testar funcionalidades no meu Wallet', () => {
     jest.spyOn(global, 'fetch').mockImplementation(async () => ({ json: async () => mockData }));
     renderWithRouterAndRedux(<App />, { initialEntries: ['/carteira'] });
     expect(screen.getByText(/0\.00/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', {
+      name: /brl/i,
+    })).toBeInTheDocument();
+    expect(screen.getByText(/walletform/i)).toBeInTheDocument();
+    expect(screen.getByRole('spinbutton')).toBeInTheDocument();
+    expect(screen.getByRole('textbox')).toBeInTheDocument();
+    expect(screen.getByText(/moeda:/i)).toBeInTheDocument();
+    expect(screen.getByRole('combobox', {
+      name: /moeda:/i,
+    })).toBeInTheDocument();
+    expect(screen.getByRole('combobox', {
+      name: /metodo pagamento:/i,
+    })).toBeInTheDocument();
+    expect(screen.getByRole('combobox', {
+      name: /categoria:/i,
+    })).toBeInTheDocument();
+
     const moedaLocal = screen.getByRole('heading', {
       name: /brl/i,
     });
@@ -18,14 +35,44 @@ describe('Testar funcionalidades no meu Wallet', () => {
 });
 
 describe('Componente Botao Adicionar Dispesas', () => {
-  test('O editar deve aparecer quando clicar no botão', () => {
+  test('testar botao adicionar', () => {
     jest.spyOn(global, 'fetch').mockImplementation(async () => ({ json: async () => mockData }));
     renderWithRouterAndRedux(<App />, { initialEntries: ['/carteira'] });
 
-    const button = screen.getByRole('button', {
+    const btnAdc = screen.getByRole('button', {
       name: /adicionar despesas/i,
     });
-    expect(button).toBeInTheDocument();
-    userEvent.click(button);
+    expect(btnAdc).toBeInTheDocument();
+    userEvent.click(btnAdc);
+  });
+});
+
+describe('Componente Botao editar', () => {
+  test('testar botão editar', () => {
+    jest.spyOn(global, 'fetch').mockImplementation(async () => ({ json: async () => mockData }));
+    renderWithRouterAndRedux(<App />, { initialEntries: ['/carteira'] });
+
+    const btnEdt = screen.getByRole('button', {
+      name: /editar despesas/i,
+    });
+    expect(btnEdt).toBeInTheDocument();
+
+    const buttonEdt = screen.getByTestId('edit-btn');
+    expect(buttonEdt).toBeInTheDocument();
+  });
+});
+
+describe('Componente Botao Excluir', () => {
+  test('testar Botão Excluir', () => {
+    jest.spyOn(global, 'fetch').mockImplementation(async () => ({ json: async () => mockData }));
+    renderWithRouterAndRedux(<App />, { initialEntries: ['/carteira'] });
+
+    const btnExc = screen.getByRole('button', {
+      name: /excluir/i,
+    });
+    expect(btnExc).toBeInTheDocument();
+    const buttonExc = screen.getByTestId('delete-btn');
+    expect(buttonExc).toBeInTheDocument();
+    userEvent.click(buttonExc);
   });
 });
