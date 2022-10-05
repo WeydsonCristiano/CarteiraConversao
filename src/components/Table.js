@@ -70,7 +70,7 @@ class Table extends Component {
                     id={ e.id }
                     onClick={ () => this.editarBotao(e.id) }
                   >
-                    Editar despesa
+                    Editar
                   </button>
                   <button
                     data-testid="delete-btn"

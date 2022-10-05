@@ -106,6 +106,7 @@ class WalletForm extends Component {
             required
           />
           <label htmlFor="currency">
+            Moeda:
             <select
               id="currency"
               onChange={ this.handlechanger }
@@ -120,6 +121,7 @@ class WalletForm extends Component {
             </select>
           </label>
           <label htmlFor="method">
+            Metodo Pagamento:
             <select
               id="method"
               value={ method }
@@ -133,6 +135,7 @@ class WalletForm extends Component {
             </select>
           </label>
           <label htmlFor="tag">
+            Categoria:
             <select
               id="tag"
               value={ tag }
