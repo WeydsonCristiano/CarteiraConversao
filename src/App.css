@@ -1,41 +1,180 @@
-.App {
-  text-align: center;
+:root {
+  --color: whitesmoke;
+  ;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  box-sizing: border-box;
+  font-family: Oxanium, cursive;
+  margin: 0;
+  padding: 0;
 }
 
-@media ( prefers-reduced-motion : no-preference ) {
+body {
+  background-image: url("../imagem/cartao.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: var(--color);
 
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
 
-.App-header {
+html {
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.6);
+  height: 100%;
+}
+
+header {
   align-items: center;
-  background-color: #282c34;
-  color: white;
+  background-image: linear-gradient(315deg, #080b50 0%, #80728a 75%);
   display: flex;
   flex-direction: column;
-  font-size: calc(10px + 2vmin);
   justify-content: center;
-  min-height: 100vh;
+  margin: 0 auto;
+  width: 80%;
 }
 
-.App-link {
-  color: #61dafb;
+.login {
+  align-items: center;
+  display: flex;
+  font-size: 3rem;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  margin: 20vh auto;
+  width: 20vw;
 }
 
-@keyframes App-logo-spin {
+.login form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
 
-  from {
-    transform: rotate(0deg);
+form {
+  font-size: 1.6rem;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 80%;
+}
+
+input {
+  color: black;
+  font-size: 80%;
+}
+
+button {
+  background-image: linear-gradient(315deg, #080b50 0%, #80728a 75%);
+  font-size: 1.2rem;
+}
+
+.css-button-gradient--1 {
+  background-size: 120% auto;
+  background-image: linear-gradient(315deg, #080b50 0%, #80728a 75%);
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: bold;
+  height: 40px;
+  min-width: 130px;
+  outline: none;
+  padding: 5px 10px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.css-button-gradient--1:hover {
+  background-position: right center;
+}
+
+.css-button-gradient--1:active {
+  top: 2px;
+}
+
+h1 {
+  color: whitesmoke;
+  font-size: 4rem;
+  text-shadow: 2px 2px #080b50;
+}
+
+.infoUser {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.infoValor {
+  display: flex;
+}
+
+.divFormInputs {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 10px;
+  padding: 10px;
+}
+
+table {
+  background-color: rgba(188, 107, 219, 0.1);
+}
+
+table button {
+  background-image: linear-gradient(315deg, #080b50 0%, #c3bbdc 75%);
+  border-radius: 5px;
+  border-style: none;
+  font-size: 1rem;
+  height: 20px;
+  margin: 20px auto;
+  margin-right: 10px;
+  padding: 0px 5px;
+}
+
+table {
+  font-size: 1.3rem;
+  margin: 0 auto;
+  text-align: center;
+  width: 80%;
+}
+
+@media screen and (max-width:760px) {
+
+  header {
+    font-size: 0.8rem;
+    width: 60%;
   }
 
-  to {
-    transform: rotate(360deg);
+  h1 {
+    font-size: 1.6rem;
+    width: 60%;
+  }
+
+  .login {
+    font-size: 1.6rem;
+    width: 80%;
+  }
+
+  input {
+    font-size: 1rem;
+    width: 80%;
+  }
+
+  button {
+    font-size: 1rem;
+    width: 80%;
+  }
+
+  form {
+    font-size: 0.8rem;
+    width: 60%;
+  }
+
+  table {
+    font-size: 0.9rem;
+    width: 40%;
   }
 }

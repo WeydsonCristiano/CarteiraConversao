@@ -86,90 +86,87 @@ class WalletForm extends Component {
     const { value, description, currency, method, tag } = this.state;
     const { currencies, editor } = this.props;
     return (
-      <>
-        <div>WalletForm</div>
-        <form>
-          Valor:
-          <input
-            data-testid="value-input"
-            name="value"
-            value={ value }
+      <form className="divFormInputs">
+        Valor:
+        <input
+          data-testid="value-input"
+          name="value"
+          value={ value }
+          onChange={ this.handlechanger }
+          type="number"
+          required
+        />
+        Descrição:
+        <input
+          data-testid="description-input"
+          name="description"
+          value={ description }
+          onChange={ this.handlechanger }
+          type="text"
+          required
+        />
+        <label htmlFor="currency">
+          Moeda:
+          <select
+            id="currency"
             onChange={ this.handlechanger }
-            type="number"
-            required
-          />
-          Descrição:
-          <input
-            data-testid="description-input"
-            name="description"
-            value={ description }
-            onChange={ this.handlechanger }
-            type="text"
-            required
-          />
-          <label htmlFor="currency">
-            Moeda:
-            <select
-              id="currency"
-              onChange={ this.handlechanger }
-              data-testid="currency-input"
-              value={ currency }
-              name="currency"
-            >
-              { currencies.map((e) => (
-                <option key={ e } value={ e }>{e}</option>
-              ))}
+            data-testid="currency-input"
+            value={ currency }
+            name="currency"
+          >
+            { currencies.map((e) => (
+              <option key={ e } value={ e }>{e}</option>
+            ))}
 
-            </select>
-          </label>
-          <label htmlFor="method">
-            Metodo Pagamento:
-            <select
-              id="method"
-              value={ method }
-              onChange={ this.handlechanger }
-              data-testid="method-input"
-              name="method"
-            >
-              {PAGAMENTO_LIST.map((e) => (
-                <option key={ e } value={ e }>{e}</option>
-              ))}
-            </select>
-          </label>
-          <label htmlFor="tag">
-            Categoria:
-            <select
-              id="tag"
-              value={ tag }
-              onChange={ this.handlechanger }
-              data-testid="tag-input"
-              name="tag"
-            >
-              {CATEGORIA_LIST.map((e) => (
-                <option key={ e } value={ e }>{e}</option>
-              ))}
-            </select>
-          </label>
-          {
-            editor
-              ? (
-                <button
-                  onClick={ this.handleChangerEdit }
-                  type="button"
-                >
-                  Editar despesas
-                </button>)
-              : (
-                <button
-                  type="button"
-                  onClick={ this.onClickButton }
-                >
-                  Adicionar despesas
-                </button>
-              )
-          }
-        </form>
-      </>
+          </select>
+        </label>
+        <label htmlFor="method">
+          Metodo Pagamento:
+          <select
+            id="method"
+            value={ method }
+            onChange={ this.handlechanger }
+            data-testid="method-input"
+            name="method"
+          >
+            {PAGAMENTO_LIST.map((e) => (
+              <option key={ e } value={ e }>{e}</option>
+            ))}
+          </select>
+        </label>
+        <label htmlFor="tag">
+          Categoria:
+          <select
+            id="tag"
+            value={ tag }
+            onChange={ this.handlechanger }
+            data-testid="tag-input"
+            name="tag"
+          >
+            {CATEGORIA_LIST.map((e) => (
+              <option key={ e } value={ e }>{e}</option>
+            ))}
+          </select>
+        </label>
+        {
+          editor
+            ? (
+              <button
+                onClick={ this.handleChangerEdit }
+                type="button"
+              >
+                Editar despesas
+              </button>)
+            : (
+              <button
+                type="button"
+                onClick={ this.onClickButton }
+              >
+                Adicionar despesas
+              </button>
+            )
+        }
+      </form>
     );
   }
 }

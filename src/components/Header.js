@@ -15,24 +15,32 @@ class Header extends Component {
   render() {
     const { email } = this.props;
     return (
-      <>
-        <div>Header</div>
-        <p
-          data-testid="email-field"
-        >
-          { email}
-        </p>
-        <h3
-          data-testid="total-field"
-        >
-          { this.somaCompras() }
-        </h3>
-        <h3
-          data-testid="header-currency-field"
-        >
-          BRL
-        </h3>
-      </>
+      <header>
+        <h1>Bem vindo ao Cris Wallet</h1>
+        <div className="infoUser">
+          <h2>Planilha de Custo</h2>
+          <h2
+            data-testid="email-field"
+          >
+            { email}
+          </h2>
+
+          <div className="infoValor">
+            <h3>Valor Total:</h3>
+            <h3
+              data-testid="total-field"
+            >
+              { this.somaCompras() }
+            </h3>
+            <h3
+              data-testid="header-currency-field"
+            >
+              BRL
+            </h3>
+
+          </div>
+        </div>
+      </header>
     );
   }
 }
