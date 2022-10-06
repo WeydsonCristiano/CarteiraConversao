@@ -33,6 +33,7 @@ header {
   width: 80%;
 }
 
+
 .login {
   align-items: center;
   display: flex;
@@ -104,10 +105,17 @@ h1 {
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  margin-left: 1%;
 }
 
 .infoValor {
   display: flex;
+  margin-right: 1%;
+}
+
+.infoValor h3 {
+  display: inline;
+  padding-right: 10px;
 }
 
 .divFormInputs {
@@ -177,4 +185,19 @@ table {
     font-size: 0.9rem;
     width: 40%;
   }
+
+  .infoUser {
+    font-size: 0.6rem;
+  
+  }
+
+  .infoValor {
+    font-size: 0.5rem;
+  
+  }
+
+  h2 {
+    font-size: 0.6rem;
+  }
+
 }
